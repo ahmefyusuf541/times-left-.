@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+	<style type="text/css">
+	body {
+	font-family: Arial, sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+	background: linear-gradient(to right, #ff5f6d, #ffc371);
+	}
+	
+	.container {
+	text-align: center;
+	background: white;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	}
+	
+	h1 {
+	margin-bottom: 20px;
+	color: #333;
+	}
+	
+	#countdown {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	}
+	
+	.time-box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background: #333;
+	color: white;
+	padding: 10px;
+	border-radius: 5px;
+	width: 70px;
+	}
+	
+	.time {
+	font-size: 2rem;
+	margin-bottom: 5px;
+	}
+	
+	.label {
+	font-size: 1rem;
+	}
+	</style>
+</head>
+<body>
+    <div class="container">
+        <h1>Countdown to June 25, 2024, 8:30 AM</h1>
+        <div id="countdown">
+            <div class="time-box">
+                <span class="time" id="days">00</span>
+                <span class="label">Days</span>
+            </div>
+            <div class="time-box">
+                <span class="time" id="hours">00</span>
+                <span class="label">Hours</span>
+            </div>
+            <div class="time-box">
+                <span class="time" id="minutes">00</span>
+                <span class="label">Minutes</span>
+            </div>
+            <div class="time-box">
+                <span class="time" id="seconds">00</span>
+                <span class="label">Seconds</span>
+            </div>
+        </div>
+    </div>
+	<script type="text/javascript">
+	function updateCountdown() {
+	const targetDate = new Date('June 25, 2024 08:30:00').getTime();
+	const now = new Date().getTime();
+	const timeLeft = targetDate - now;
+	
+	const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+	const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+	const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+	
+	document.getElementById('days').textContent = String(days).padStart(2, '0');
+	document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+	document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+	document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+	
+	if (timeLeft < 0) {
+	clearInterval(interval);
+	document.getElementById('countdown').innerHTML = "EXPIRED";
+	}
+	}
+	
+	const interval = setInterval(updateCountdown, 1000);
+	</script>
+</body>
+</html>
